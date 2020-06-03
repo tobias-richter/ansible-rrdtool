@@ -1,0 +1,18 @@
+galaxy_info:
+  role_name: rrdtool
+  author: Tobias Richter
+  description: Ansible Role for installing rrdtool
+  license: Apache
+  min_ansible_version: 2.7
+
+  platforms:
+    - name: Debian
+      versions:
+        - any
+    - name: Ubuntu
+      versions:
+        - any
+
+  galaxy_tags:
+    - rrd
+    - rrdtool
