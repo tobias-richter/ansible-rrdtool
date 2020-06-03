@@ -1,0 +1,57 @@
+#- name: Ensure package source list is correct.
+#  copy:
+#    dest: "/etc/apt/sources.list.d/archive_ubuntu_com_ubuntu.list"
+#    content: |
+#      # ansible managed
+#      deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
+
+- name: Check if rrd tool version is already build
+  stat:
+    path: "{{ rrdtool_install_dir }}/bin/rrdtool"
+    get_attributes: false
+    get_checksum: false
+    get_md5: false
+    get_mime: false
+  register: _rrdtool_result
+  changed_when: false
+
+- debug:
+    msg:
+      - _rrdtool_result
+      - "{{ _rrdtool_result }}"
+
+- name: Build rrdtool
+  block:
+  - name: install required packages.
+    apt:
+      name: "{{ rrdtool_deps }}"
+
+  - name: Ensure builddir is present.
+    file:
+      path: "{{ rrdtool_build_dir }}"
+      state: directory
+
+  - name: Ensure builddir is empty
+    shell: "rm -rf {{ rrdtool_build_dir }}/*"
+
+  - name: Download rrdtool source.
+    get_url:
+      url: "{{ rrdtool_download_url }}"
+      dest: "{{ rrdtool_download_dest }}"
+
+  - name: Unarchive source package.
+    unarchive:
+      src: "{{ rrdtool_download_dest }}"
+      dest: "{{ rrdtool_build_dir }}/"
+      remote_src: yes
+      extra_opts:
+        - --strip-components=1
+
+  - name: build
+    shell: "./configure --prefix=$INSTALL_DIR && make && make install"
+    args:
+      chdir: "{{ rrdtool_build_dir }}"
+    environment:
+      INSTALL_DIR: "{{ rrdtool_install_dir }}"
+
+  when: not _rrdtool_result.stat.exists
