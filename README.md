@@ -16,7 +16,7 @@ See [defaults/main.yml](defaults/main.yml) for the documented role variables.
 
 This playbook compiles/setups rrdtool in version 1.7.2.
 
-    - hosts: pve
+    - hosts: rrdtool
 	  roles:
 	    - role: tobias_richter.rrdtool
 	      rrdtool_version: 1.7.2
