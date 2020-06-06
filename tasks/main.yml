@@ -26,13 +26,15 @@
     apt:
       name: "{{ rrdtool_deps }}"
 
+  - name: Ensure builddir is absend / empty.
+    file:
+      path: "{{ rrdtool_build_dir }}"
+      state: absent
+
   - name: Ensure builddir is present.
     file:
       path: "{{ rrdtool_build_dir }}"
       state: directory
-
-  - name: Ensure builddir is empty
-    shell: "rm -rf {{ rrdtool_build_dir }}/*"
 
   - name: Download rrdtool source.
     get_url:
