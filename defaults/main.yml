@@ -1,8 +1,20 @@
+# The rrdtool version to compile/setup
 rrdtool_version: 1.7.2
+
+# The download url of the source packages
 rrdtool_download_url: "https://oss.oetiker.ch/rrdtool/pub/rrdtool-{{ rrdtool_version }}.tar.gz"
+
+# The download destination
 rrdtool_download_dest: "/tmp/rrdtool-{{ rrdtool_version }}.tar.gz"
+
+# Basedirectory for buidling the rrdtool
 rrdtool_build_dir: "/tmp/rrdbuild"
+
+# Installation target dir
 rrdtool_install_dir: "/opt/rrdtool/{{ rrdtool_version }}"
+
+# Required packages
 rrdtool_deps:
+  - build-essential
   - libpango1.0-dev
   - libxml2-dev
