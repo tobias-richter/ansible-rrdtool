@@ -14,5 +14,5 @@ galaxy_info:
         - all
 
   galaxy_tags:
-    - rrd
-    - rrdtool
+    - python
+    - pip

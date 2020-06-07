@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tobias-richter/ansible-rrdtool.svg?branch=master)](https://travis-ci.org/tobias-richter/ansible-rrdtool)
 
-This roles compiles/setups rrdtool on Debian/Ubuntu systems
+This role compiles/setups rrdtool on Debian/Ubuntu systems
 
 ## Requirements
 
