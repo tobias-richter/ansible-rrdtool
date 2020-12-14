@@ -1,6 +1,6 @@
 # tobias_richter.rrdtool
 
-[![Build Status](https://travis-ci.org/tobias-richter/ansible-rrdtool.svg?branch=master)](https://travis-ci.org/tobias-richter/ansible-rrdtool)
+[![Build Status](https://github.com/tobias-richter/ansible-rrdtool/workflows/CI/badge.svg)](https://github.com/tobias-richter/ansible-rrdtool/actions)
 
 This role compiles/setups rrdtool on Debian/Ubuntu systems
 
