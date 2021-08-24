@@ -1,5 +1,7 @@
+---
 galaxy_info:
   role_name: rrdtool
+  namespace: tobias_richter
   author: Tobias Richter
   description: Ansible Role for installing rrdtool
   license: Apache
