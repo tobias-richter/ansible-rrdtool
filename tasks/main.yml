@@ -41,7 +41,7 @@
           - --strip-components=1
 
     - name: build
-      shell: "./configure --prefix=$INSTALL_DIR && make && make install"
+      shell: "sh ./configure --prefix=$INSTALL_DIR && make && make install"
       args:
         chdir: "{{ rrdtool_build_dir }}"
       environment:
