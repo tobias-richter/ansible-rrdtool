@@ -1,10 +1,4 @@
-#- name: Ensure package source list is correct.
-#  copy:
-#    dest: "/etc/apt/sources.list.d/archive_ubuntu_com_ubuntu.list"
-#    content: |
-#      # ansible managed
-#      deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
-
+---
 - name: Check if rrd tool version is already build
   stat:
     path: "{{ rrdtool_install_dir }}/bin/rrdtool"
@@ -17,40 +11,40 @@
 
 - name: Build rrdtool
   block:
-  - name: install required packages.
-    apt:
-      name: "{{ rrdtool_deps }}"
+    - name: install required packages.
+      apt:
+        name: "{{ rrdtool_deps }}"
 
-  - name: Ensure builddir is absend / empty.
-    file:
-      path: "{{ rrdtool_build_dir }}"
-      state: absent
+    - name: Ensure builddir is absend / empty.
+      file:
+        path: "{{ rrdtool_build_dir }}"
+        state: absent
 
-  - name: Ensure builddir is present.
-    file:
-      path: "{{ rrdtool_build_dir }}"
-      state: directory
-      mode: 0755
+    - name: Ensure builddir is present.
+      file:
+        path: "{{ rrdtool_build_dir }}"
+        state: directory
+        mode: 0755
 
-  - name: Download rrdtool source.
-    get_url:
-      url: "{{ rrdtool_download_url }}"
-      dest: "{{ rrdtool_download_dest }}"
+    - name: Download rrdtool source.
+      get_url:
+        url: "{{ rrdtool_download_url }}"
+        dest: "{{ rrdtool_download_dest }}"
 
-  - name: Unarchive source package.
-    unarchive:
-      src: "{{ rrdtool_download_dest }}"
-      dest: "{{ rrdtool_build_dir }}/"
-      remote_src: yes
-      mode: 0644
-      extra_opts:
-        - --strip-components=1
+    - name: Unarchive source package.
+      unarchive:
+        src: "{{ rrdtool_download_dest }}"
+        dest: "{{ rrdtool_build_dir }}/"
+        remote_src: yes
+        mode: 0644
+        extra_opts:
+          - --strip-components=1
 
-  - name: build
-    shell: "sh ./configure --prefix=$INSTALL_DIR && make && make install"
-    args:
-      chdir: "{{ rrdtool_build_dir }}"
-    environment:
-      INSTALL_DIR: "{{ rrdtool_install_dir }}"
+    - name: build
+      shell: "sh ./configure --prefix=$INSTALL_DIR && make && make install"
+      args:
+        chdir: "{{ rrdtool_build_dir }}"
+      environment:
+        INSTALL_DIR: "{{ rrdtool_install_dir }}"
 
   when: not _rrdtool_result.stat.exists

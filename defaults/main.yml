@@ -1,3 +1,4 @@
+---
 # The rrdtool version to compile/setup
 rrdtool_version: 1.7.2
 
