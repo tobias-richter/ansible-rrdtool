@@ -3,7 +3,7 @@
 rrdtool_version: 1.7.2
 
 # The download url of the source packages
-rrdtool_download_url: "https://oss.oetiker.ch/rrdtool/pub/rrdtool-{{ rrdtool_version }}.tar.gz"
+rrdtool_download_url: "https://github.com/oetiker/rrdtool-1.x/releases/download/v{{ rrdtool_version }}/rrdtool-{{ rrdtool_version }}.tar.gz"
 
 # The download destination
 rrdtool_download_dest: "/tmp/rrdtool-{{ rrdtool_version }}.tar.gz"
