@@ -1,6 +1,6 @@
 ---
 - name: Check if rrd tool version is already build
-  stat:
+  ansible.builtin.stat:
     path: "{{ rrdtool_install_dir }}/bin/rrdtool"
     get_attributes: false
     get_checksum: false
@@ -10,29 +10,29 @@
   changed_when: false
 
 - name: Build rrdtool
-  block:
+  ansible.builtin.block:
     - name: install required packages.
-      apt:
+      ansible.builtin.apt:
         name: "{{ rrdtool_deps }}"
 
     - name: Ensure builddir is absend / empty.
-      file:
+      ansible.builtin.file:
         path: "{{ rrdtool_build_dir }}"
         state: absent
 
     - name: Ensure builddir is present.
-      file:
+      ansible.builtin.file:
         path: "{{ rrdtool_build_dir }}"
         state: directory
         mode: 0755
 
     - name: Download rrdtool source.
-      get_url:
+      ansible.builtin.get_url:
         url: "{{ rrdtool_download_url }}"
         dest: "{{ rrdtool_download_dest }}"
 
     - name: Unarchive source package.
-      unarchive:
+      ansible.builtin.unarchive:
         src: "{{ rrdtool_download_dest }}"
         dest: "{{ rrdtool_build_dir }}/"
         remote_src: yes
@@ -41,7 +41,7 @@
           - --strip-components=1
 
     - name: build
-      shell: "sh ./configure --prefix=$INSTALL_DIR && make && make install"
+      ansible.builtin.shell: "sh ./configure --prefix=$INSTALL_DIR && make && make install"
       args:
         chdir: "{{ rrdtool_build_dir }}"
       environment:
