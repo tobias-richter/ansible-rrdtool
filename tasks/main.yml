@@ -47,5 +47,6 @@
         chdir: "{{ rrdtool_build_dir }}"
       environment:
         INSTALL_DIR: "{{ rrdtool_install_dir }}"
+      changed_when: true
 
   when: not _rrdtool_result.stat.exists
