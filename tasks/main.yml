@@ -10,7 +10,7 @@
   changed_when: false
 
 - name: Build rrdtool
-  ansible.builtin.block:
+  block:
     - name: install required packages.
       ansible.builtin.apt:
         name: "{{ rrdtool_deps }}"
