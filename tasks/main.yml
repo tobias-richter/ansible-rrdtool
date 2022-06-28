@@ -30,6 +30,7 @@
       ansible.builtin.get_url:
         url: "{{ rrdtool_download_url }}"
         dest: "{{ rrdtool_download_dest }}"
+        mode: 0644
 
     - name: Unarchive source package.
       ansible.builtin.unarchive:
