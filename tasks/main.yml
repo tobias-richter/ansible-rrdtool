@@ -4,7 +4,6 @@
     path: "{{ rrdtool_install_dir }}/bin/rrdtool"
     get_attributes: false
     get_checksum: false
-    get_md5: false
     get_mime: false
   register: _rrdtool_result
   changed_when: false
